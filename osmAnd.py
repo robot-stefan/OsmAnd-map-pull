@@ -85,16 +85,22 @@ def download_file(url, session=None, timeout=30, chunk_size=8192):
                     pbar.update(len(chunk))
         return b"".join(chunks)
 
-def extract_zip_bytes_to_folder(zip_bytes, target_folder):
-    os.makedirs(target_folder, exist_ok=True)
-    extracted = []
-    with zipfile.ZipFile(BytesIO(zip_bytes)) as z:
-        z.extractall(target_folder)
-        for zi in z.infolist():
-            extracted.append(os.path.join(target_folder, zi.filename))
-    return extracted
+# def extract_zip_bytes_to_folder(zip_bytes, target_folder):
+    """
+    Zip extraction without a progress bar.
+    """
+#     os.makedirs(target_folder, exist_ok=True)
+#     extracted = []
+#     with zipfile.ZipFile(BytesIO(zip_bytes)) as z:
+#         z.extractall(target_folder)
+#         for zi in z.infolist():
+#             extracted.append(os.path.join(target_folder, zi.filename))
+#     return extracted
 
 def extract_with_byte_progress(zip_bytes, target_folder, chunk_size=8192):
+    """
+    Zip extraction with a tqdm progress bar.
+    """
     os.makedirs(target_folder, exist_ok=True)
     with zipfile.ZipFile(BytesIO(zip_bytes)) as z:
         infos = z.infolist()
