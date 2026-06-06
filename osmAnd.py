@@ -6,9 +6,10 @@ import argparse
 import requests
 import zipfile
 from tqdm import tqdm
-# from urllib.parse import urlsplit, unquote
 from io import BytesIO
 from bs4 import BeautifulSoup
+
+# This file creates the function fetch_and_process which grabs a list of relevant map zips, downloads them, then extracts the maps, and updates the name. 
 
 def fetch_listing(listing_url, session=None, timeout=30):
     sess = session or requests.Session()
@@ -50,6 +51,9 @@ def extract_zip_links_bs(html_text, name, listing_url):
     return results
 
 # def download_file(url, session=None, timeout=30):
+    """
+    Download URL without using a progress bar.
+    """
 #     sess = session or requests.Session()
 #     r = sess.get(url, stream=True, timeout=timeout)
 #     r.raise_for_status()
@@ -143,7 +147,7 @@ def fetch_and_process(name, listing_url="https://download.osmand.net/list.php", 
             entry['errors'].append(f"download error: {e}")
             results.append(entry)
             continue
-
+            
         try:
             subfolder = files_dir
             extract_with_byte_progress(data, subfolder)
@@ -194,6 +198,7 @@ def main(argv=None):
 if __name__ == "__main__":
     main()
 
-# state = "us_georgia"
+## Below used to test modifications and updates with a smaller state map.
+# state = "us_rhode"
 # listing_url = "https://download.osmand.net/list.php"
 # fetch_and_process(state, listing_url, files_dir="files")
