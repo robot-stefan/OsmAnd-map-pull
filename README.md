@@ -1,7 +1,7 @@
 # Overview
 This is a script to pull [OsmAnd](https://www.osmand.net) maps files in batch from [OsmAnd's Local Indexes List](https://download.osmand.net/list.php). You can then copy these from the downloaded location into the directory on your mobile device(s). Allowing you to only download the maps once for multiple devices versus on each device every update. When I go on road trips, camping, hiking; I'll typically have a backup device in water resistant bag with OsmAnd for offline maps. This allows me to update both devices once. 
 
-I was able to vibe code, test, and deploy this in an afternoon with [duckai](https://duck.ai/) using GPT-5 mini and [VS Code](https://code.visualstudio.com/) for an editor. 
+I was able to vibe code, test, and deploy this in an afternoon with [duckai](https://duck.ai/) using [GPT-5 mini](https://developers.openai.com/api/docs/models/gpt-5-mini) and [VS Code](https://code.visualstudio.com/) for an editor. 
 
 # Notes on Function
 This uses [BeautifulSoup4](https://pypi.org/project/beautifulsoup4/) and regular expressions to grab relevant zip files, downloads them, and then extracts them to a files folder. Since this uses regular expressions you can create a batch by providing it northamerica, europe, canada, us_, us_california, etc. A seperate file ```osmAndBatch.py``` for crafting your own list of specific maps is included. Progress bars for dowloading and extraction are implemented with [tqdm](https://pypi.org/project/tqdm/). Functions without tqdm are left commented out, but uncommenting these and updating the calls to point to them will allow you turn off the progress bar visualization .
@@ -13,7 +13,7 @@ To get going with this do the following in order. Notes for both linux and windo
 
 1. Setup your virtual envrionment:
    - Windows -> ```python -m venv .venv```
-   - Linux -> ```python -m venv .venv```
+   - Linux -> ```python -m venv .venv``` or possibly ```python3 -m venv .venv```
 
 2. Source the environment:
    - Windows -> ```.\\.venv\Scripts\activate```
